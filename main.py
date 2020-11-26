@@ -1,7 +1,7 @@
 import pygame
-from time import sleep
 from Button import button
 import classes
+
 pygame.init()
 largura=750
 altura=600

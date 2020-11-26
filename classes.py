@@ -1,4 +1,5 @@
 import pygame
+
 class Papai_noel(pygame.sprite.Sprite):
     def __init__(self, lista_bracos):
         super(Papai_noel, self).__init__()
