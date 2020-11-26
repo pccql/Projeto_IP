@@ -46,7 +46,7 @@ def main():
     fundo = pygame.image.load("./images/cenario2.jpg")
     fundo = pygame.transform.smoothscale(fundo, (largura, altura))
 
-    
+    # teste
     braco_cima = pygame.image.load('./images/papai_noel_correndo.png')
     braco_baixo = pygame.image.load('./images/papainoelcorrendo2.png')
     lista_bracos = [braco_baixo, braco_cima]
