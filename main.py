@@ -1,8 +1,9 @@
 import pygame
 from time import sleep
 from Button import button
+import classes
 pygame.init()
-largura=600
+largura=750
 altura=600
 tela=pygame.display.set_mode([largura,altura])
 pygame.display.set_caption("Salve o Natal")
@@ -45,6 +46,16 @@ def main():
     fundo = pygame.image.load("./images/cenario2.jpg")
     fundo = pygame.transform.smoothscale(fundo, (largura, altura))
 
+    
+    braco_cima = pygame.image.load('./images/papai_noel_correndo.png')
+    braco_baixo = pygame.image.load('./images/papainoelcorrendo2.png')
+    lista_bracos = [braco_baixo, braco_cima]
+    braco_cima_invertido = pygame.image.load('./images/papai_noel_correndovirado.png')
+    braco_baixo_invertido = pygame.image.load('./images/papainoelcorrendo2virado.png')
+    lista_bracos_invertido = [braco_baixo_invertido, braco_cima_invertido]
+
+    jogador = classes.Papai_noel(lista_bracos)
+
     running=True
     while running:
         for event in pygame.event.get():
@@ -54,6 +65,11 @@ def main():
                 if event.key == pygame.K_ESCAPE:
                     running = False
         tela.blit(fundo,(0,0))
+
+        tela.blit(jogador.surf, jogador.rect)
+
+        jogador.andar(pygame.key.get_pressed(), lista_bracos, lista_bracos_invertido)
+
         pygame.display.update()
         relogio.tick(27)
 
