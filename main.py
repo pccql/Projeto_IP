@@ -20,10 +20,10 @@ def tela_inicial():
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                running = False
+                pygame.quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    running = False
+                    pygame.quit()
 
         tela.blit(abertura,(0,0))
         if button(40,"START",(115,510),(255,255,255),(255,0,0),tela,(255,255,38),(255,0,0), './fonte.ttf'):
@@ -37,6 +37,7 @@ def tela_inicial():
 
         if (pygame.time.get_ticks() - tempo_inicio) /1000 > 1.9:
             running = False
+        
 
         pygame.display.update()
         relogio.tick(27)
@@ -46,15 +47,29 @@ def main():
     fundo = pygame.image.load("./images/cenario2.jpg")
     fundo = pygame.transform.smoothscale(fundo, (largura, altura))
 
-    # teste
-    braco_cima = pygame.image.load('./images/papai_noel_correndo.png')
-    braco_baixo = pygame.image.load('./images/papainoelcorrendo2.png')
+
+    braco_cima = pygame.image.load('./papai_noel_correndoteste.png')
+    braco_baixo = pygame.image.load('./papainoelcorrendo2teste.png')
     lista_bracos = [braco_baixo, braco_cima]
-    braco_cima_invertido = pygame.image.load('./images/papai_noel_correndovirado.png')
-    braco_baixo_invertido = pygame.image.load('./images/papainoelcorrendo2virado.png')
+    braco_cima_invertido = pygame.image.load('./papai_noel_correndoviradoteste.png')
+    braco_baixo_invertido = pygame.image.load('./papainoelcorrendo2viradoteste.png')
     lista_bracos_invertido = [braco_baixo_invertido, braco_cima_invertido]
 
     jogador = classes.Papai_noel(lista_bracos)
+
+    presente1 = pygame.image.load('./presente1teste.png')
+    presente1 = pygame.transform.smoothscale(presente1, (45,45))
+    presente2 = pygame.image.load('./images/presente2.png')
+    presente3 = pygame.image.load('./images/presente3.png')
+    presente4 = pygame.image.load('./images/presente4.png')
+    presente5 = pygame.image.load('./images/presente5.png')
+    presente6 = pygame.image.load('./images/presente6.png')
+    bola = pygame.image.load('./images/bolinha.png')
+    estrela = pygame.image.load('./images/estrela.png')
+    lista_objetos = [presente1,presente2,presente3,presente4,presente4,presente5,presente6,bola,estrela]
+
+
+    objeto = classes.Objetos(lista_objetos)
 
     running=True
     while running:
@@ -70,7 +85,14 @@ def main():
 
         jogador.andar(pygame.key.get_pressed(), lista_bracos, lista_bracos_invertido)
 
+        tela.blit(objeto.surf,objeto.rect)
+
+        if pygame.sprite.collide_rect(jogador, objeto):
+            objeto.kill()
+            objeto = classes.Objetos(lista_objetos)
+            
         pygame.display.update()
+    
         relogio.tick(27)
 
 tela_inicial()

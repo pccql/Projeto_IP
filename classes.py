@@ -1,5 +1,5 @@
 import pygame
-
+from random import randint
 class Papai_noel(pygame.sprite.Sprite):
     def __init__(self, lista_bracos):
         super(Papai_noel, self).__init__()
@@ -27,13 +27,21 @@ class Papai_noel(pygame.sprite.Sprite):
                 self.numero = int(self.numero)
                 self.surf = lista_bracos_invertido[self.numero % 2] 
 
-        if self.rect.right >= 900:
-            self.rect.right = 900
-        if self.rect.left <= -150:
-            self.rect.left = -150
-        if self.rect.top <= 210:
-            self.rect.top = 210
-        if self.rect.bottom >= 710:
-            self.rect.bottom = 710
+        if self.rect.right >= 780:
+            self.rect.right = 780
+        if self.rect.left <= -30:
+            self.rect.left = -30
+        if self.rect.top <= 395:
+            self.rect.top = 395
+        if self.rect.bottom >= 600:
+            self.rect.bottom = 600
         
+class Objetos(pygame.sprite.Sprite):
+    def __init__(self, lista_objetos):
+        super(Objetos, self).__init__()
+        ordem = randint(0,len(lista_objetos)-1)
+        self.surf = lista_objetos[0]
+        posx=randint(23,577)
+        posy=randint(460,577)
+        self.rect = self.surf.get_rect(center=(posx,posy))
         
