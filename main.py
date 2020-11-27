@@ -4,8 +4,8 @@ import classes
 import funcoes
 
 pygame.init()
-largura=750
-altura=600
+largura=1000
+altura=650
 tela=pygame.display.set_mode([largura,altura])
 pygame.display.set_caption("Salve o Natal")
 relogio=pygame.time.Clock()
@@ -27,7 +27,7 @@ def tela_inicial():
                     pygame.quit()
 
         tela.blit(abertura,(0,0))
-        if button(40,"START",(115,510),(255,255,255),(255,0,0),tela,(255,255,38),(255,0,0), './fonte.ttf'):
+        if button(40,"START",(190,510),(255,255,255),(255,0,0),tela,(255,255,38),(255,0,0), './fonte.ttf'):
             fim_inicial = True
             tempo_inicio = pygame.time.get_ticks()
 
@@ -55,7 +55,7 @@ def main():
     jogador = classes.Papai_noel(lista_bracos)
 
     lista_objetos = funcoes.presentes()
-    objeto = classes.Objetos(lista_objetos)
+    objeto = classes.Objetos(lista_objetos, jogador.rect)
 
     running=True
     while running:
@@ -75,10 +75,10 @@ def main():
 
         if pygame.sprite.collide_rect(jogador, objeto):
             objeto.kill()
-            objeto = classes.Objetos(lista_objetos)
-            
+            objeto = classes.Objetos(lista_objetos, jogador.rect)
+        
         pygame.display.update()
-
+        
         relogio.tick(27)
 
 tela_inicial()

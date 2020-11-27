@@ -1,11 +1,12 @@
 import pygame
 from random import randint
+
 class Papai_noel(pygame.sprite.Sprite):
     def __init__(self, lista_bracos):
         super(Papai_noel, self).__init__()
         self.surf = lista_bracos[0]
         self.numero = 1
-        self.rect = self.surf.get_rect(center=(300,450))
+        self.rect = self.surf.get_rect(center=(500,450))
 
     def andar(self, teclas, lista_bracos, lista_bracos_invertido):
         if teclas[pygame.K_UP]:
@@ -27,21 +28,26 @@ class Papai_noel(pygame.sprite.Sprite):
                 self.numero = int(self.numero)
                 self.surf = lista_bracos_invertido[self.numero % 2] 
 
-        if self.rect.right >= 750:
-            self.rect.right = 750
+        if self.rect.right >= 1000:
+            self.rect.right = 1000
         if self.rect.left <= 0:
             self.rect.left = 0
-        if self.rect.top <= 344:
-            self.rect.top = 344
-        if self.rect.bottom >= 600:
-            self.rect.bottom = 600
+        if self.rect.top <= 388:
+            self.rect.top = 388
+        if self.rect.bottom >= 650:
+            self.rect.bottom = 650
         
 class Objetos(pygame.sprite.Sprite):
-    def __init__(self, lista_objetos):
+    def __init__(self, lista_objetos, pos_jogador):
         super(Objetos, self).__init__()
         ordem = randint(0,len(lista_objetos)-1)
         self.surf = lista_objetos[ordem]
-        posx=randint(23,577)
-        posy=randint(460,577)
+
+        posx=randint(23,877)
+        posy=randint(460,630)
+
+        while abs(posx - pos_jogador[0])<250:
+            posx=randint(23,877)
+
         self.rect = self.surf.get_rect(center=(posx,posy))
         
