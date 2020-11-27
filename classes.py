@@ -27,12 +27,12 @@ class Papai_noel(pygame.sprite.Sprite):
                 self.numero = int(self.numero)
                 self.surf = lista_bracos_invertido[self.numero % 2] 
 
-        if self.rect.right >= 780:
-            self.rect.right = 780
-        if self.rect.left <= -30:
-            self.rect.left = -30
-        if self.rect.top <= 395:
-            self.rect.top = 395
+        if self.rect.right >= 750:
+            self.rect.right = 750
+        if self.rect.left <= 0:
+            self.rect.left = 0
+        if self.rect.top <= 344:
+            self.rect.top = 344
         if self.rect.bottom >= 600:
             self.rect.bottom = 600
         
@@ -40,7 +40,7 @@ class Objetos(pygame.sprite.Sprite):
     def __init__(self, lista_objetos):
         super(Objetos, self).__init__()
         ordem = randint(0,len(lista_objetos)-1)
-        self.surf = lista_objetos[0]
+        self.surf = lista_objetos[ordem]
         posx=randint(23,577)
         posy=randint(460,577)
         self.rect = self.surf.get_rect(center=(posx,posy))

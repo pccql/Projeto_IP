@@ -1,6 +1,7 @@
 import pygame
 from Button import button
 import classes
+import funcoes
 
 pygame.init()
 largura=750
@@ -11,7 +12,7 @@ relogio=pygame.time.Clock()
 
 
 def tela_inicial():
-    abertura=pygame.image.load("./images/capa2.jpg")
+    abertura=pygame.image.load("./images/capa.png")
     abertura=pygame.transform.smoothscale(abertura, (largura, altura))
     fim_inicial = False
     tempo_inicio = 10000000
@@ -31,7 +32,7 @@ def tela_inicial():
             tempo_inicio = pygame.time.get_ticks()
 
         if fim_inicial and (pygame.time.get_ticks() - tempo_inicio) /1000 < 2:
-            corra = pygame.image.load('./images/corra.jpg')
+            corra = pygame.image.load('./images/tela de inicio.png')
             corra = pygame.transform.smoothscale(corra, (largura, altura))
             tela.blit(corra, (0,0))
 
@@ -44,31 +45,16 @@ def tela_inicial():
 
 
 def main():
-    fundo = pygame.image.load("./images/cenario2.jpg")
+    fundo = pygame.image.load("./images/cenario.png")
     fundo = pygame.transform.smoothscale(fundo, (largura, altura))
 
 
-    braco_cima = pygame.image.load('./papai_noel_correndoteste.png')
-    braco_baixo = pygame.image.load('./papainoelcorrendo2teste.png')
-    lista_bracos = [braco_baixo, braco_cima]
-    braco_cima_invertido = pygame.image.load('./papai_noel_correndoviradoteste.png')
-    braco_baixo_invertido = pygame.image.load('./papainoelcorrendo2viradoteste.png')
-    lista_bracos_invertido = [braco_baixo_invertido, braco_cima_invertido]
+    lista_bracos = funcoes.noel()[0]
+    lista_bracos_invertido = funcoes.noel()[1]
 
     jogador = classes.Papai_noel(lista_bracos)
 
-    presente1 = pygame.image.load('./presente1teste.png')
-    presente1 = pygame.transform.smoothscale(presente1, (45,45))
-    presente2 = pygame.image.load('./images/presente2.png')
-    presente3 = pygame.image.load('./images/presente3.png')
-    presente4 = pygame.image.load('./images/presente4.png')
-    presente5 = pygame.image.load('./images/presente5.png')
-    presente6 = pygame.image.load('./images/presente6.png')
-    bola = pygame.image.load('./images/bolinha.png')
-    estrela = pygame.image.load('./images/estrela.png')
-    lista_objetos = [presente1,presente2,presente3,presente4,presente4,presente5,presente6,bola,estrela]
-
-
+    lista_objetos = funcoes.presentes()
     objeto = classes.Objetos(lista_objetos)
 
     running=True
@@ -92,7 +78,7 @@ def main():
             objeto = classes.Objetos(lista_objetos)
             
         pygame.display.update()
-    
+
         relogio.tick(27)
 
 tela_inicial()
