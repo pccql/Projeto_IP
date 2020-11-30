@@ -10,6 +10,12 @@ tela=pygame.display.set_mode([largura,altura])
 pygame.display.set_caption("Salve o Natal")
 relogio=pygame.time.Clock()
 
+try:
+    pygame.mixer.init()
+    pygame.mixer.load('./jingle_bells.ogg')
+    pygame.mixer.play()
+except:
+    pass
 
 def tela_inicial():
     abertura=pygame.image.load("./images/capa.png")
