@@ -40,13 +40,21 @@ class Papai_noel(pygame.sprite.Sprite):
 class Objetos(pygame.sprite.Sprite):
     def __init__(self, lista_objetos, pos_jogador):
         super(Objetos, self).__init__()
+        self.estrela = False
+        self.presente = False
         ordem = randint(0,len(lista_objetos)-1)
         self.surf = lista_objetos[ordem]
+        if ordem == 8:
+            self.estrela = True
+        elif ordem == 6 or ordem == 7:
+            self.presente = False
+        else:
+            self.presente = True
 
         posx=randint(23,877)
         posy=randint(460,630)
 
-        while abs(posx - pos_jogador[0])<250:
+        while abs(posx - pos_jogador[0])<250  or abs(posx - 810)<100:
             posx=randint(23,877)
 
         self.rect = self.surf.get_rect(center=(posx,posy))

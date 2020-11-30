@@ -56,7 +56,11 @@ def main():
 
     lista_objetos = funcoes.presentes()
     objeto = classes.Objetos(lista_objetos, jogador.rect)
+    tempo_objeto = pygame.time.get_ticks()
+    tempo_final = 1000000000
 
+    dicionario_objetos = {'presente': 0, 'bolinha': 0, 'estrela': 0}
+    
     running=True
     while running:
         for event in pygame.event.get():
@@ -65,7 +69,12 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     running = False
+    
         tela.blit(fundo,(0,0))
+
+        
+
+        funcoes.arvore(dicionario_objetos, tela, lista_objetos[:8])
 
         tela.blit(jogador.surf, jogador.rect)
 
@@ -74,9 +83,42 @@ def main():
         tela.blit(objeto.surf,objeto.rect)
 
         if pygame.sprite.collide_rect(jogador, objeto):
+            if objeto.presente == True:
+                dicionario_objetos['presente'] += 1
+            elif objeto.estrela == True:
+                dicionario_objetos['estrela'] += 1
+                tempo_final = pygame.time.get_ticks()
+            else:
+                dicionario_objetos['bolinha'] += 1
+            
             objeto.kill()
-            objeto = classes.Objetos(lista_objetos, jogador.rect)
+            if dicionario_objetos['presente'] >= 30 and dicionario_objetos['bolinha'] >= 10:
+                objeto = classes.Objetos(lista_objetos, jogador.rect)
+            else:
+                objeto = classes.Objetos(lista_objetos[:8], jogador.rect)
+            tempo_objeto = pygame.time.get_ticks()
+
         
+        if (pygame.time.get_ticks()- tempo_objeto)/1000 > 2:
+            objeto.kill()
+            if dicionario_objetos['presente'] >= 30 and dicionario_objetos['bolinha'] >= 10:
+                objeto = classes.Objetos(lista_objetos, jogador.rect)
+            else:
+                objeto = classes.Objetos(lista_objetos[:8], jogador.rect)
+            tempo_objeto = pygame.time.get_ticks()
+        
+        funcoes.contador(dicionario_objetos, tela)
+        
+        if dicionario_objetos['estrela'] > 0 and (pygame.time.get_ticks() - tempo_final) /1000 < 4:
+            fim = pygame.image.load('./images/telafinal.png')
+            fim = pygame.transform.smoothscale(fim, (largura, altura))
+            tela.blit(fim,(0,0))
+        
+
+        if (pygame.time.get_ticks() - tempo_final) /1000 > 3.9:
+            running = False
+        
+            
         pygame.display.update()
         
         relogio.tick(27)
