@@ -63,7 +63,7 @@ def main():
     jogador = classes.Papai_noel(lista_bracos)
 
     lista_objetos = funcoes.presentes()
-    objeto = classes.Objetos(lista_objetos, jogador.rect)
+    objeto = classes.Objetos(lista_objetos[:8], jogador.rect)
     tempo_objeto = pygame.time.get_ticks()
     tempo_final = 1000000000
 
