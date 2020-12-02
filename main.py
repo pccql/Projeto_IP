@@ -12,8 +12,10 @@ relogio=pygame.time.Clock()
 
 try:
     pygame.mixer.init()
-    pygame.mixer.load('./jingle_bells.ogg')
-    pygame.mixer.play()
+    pygame.mixer.music.load('./jingle_bells.ogg')
+    pygame.mixer.music.set_volume(0.1)
+    pygame.mixer.music.play()
+    
 except:
     pass
 
