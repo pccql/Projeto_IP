@@ -132,7 +132,7 @@ def main():
                 else:
                     objeto = classes.Objetos(lista_objetos[:8], jogador.rect)
                 tempo_objeto = pygame.time.get_ticks()
-        elif total_coletados <= 35:
+        else:
             if (pygame.time.get_ticks()- tempo_objeto)/1000 > 2:
                 objeto.kill()
                 if dicionario_objetos['presente'] >= 30 and dicionario_objetos['bolinha'] >= 10:
